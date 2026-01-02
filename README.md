@@ -1,4 +1,4 @@
-# Osiris Stephenson - UX Researcher Portfolio
+# Osiris Stephenson - Product Designer Portfolio
 
 A modern, responsive portfolio website showcasing UX research work and case studies.
 

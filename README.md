@@ -26,7 +26,7 @@ npm run dev
 npm run build
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 osiris-stephenson-portfolio/
@@ -54,7 +54,7 @@ osiris-stephenson-portfolio/
 └── tsconfig.json          # TypeScript configuration
 ```
 
-## 🎨 Features
+##  Features
 
 - **Responsive Design**: Optimized for desktop, tablet, and mobile
 - **Modern UI**: Clean, professional design with Tailwind CSS
@@ -63,7 +63,7 @@ osiris-stephenson-portfolio/
 - **SEO Optimized**: Proper meta tags and semantic HTML
 - **Fast Loading**: Optimized images and code splitting
 
-## 🛠 Technology Stack
+##  Technology Stack
 
 - **Frontend**: React 18 + TypeScript
 - **Styling**: Tailwind CSS
@@ -72,7 +72,7 @@ osiris-stephenson-portfolio/
 - **Build Tool**: Vite
 - **Deployment**: Netlify
 
-## 📄 Pages
+##  Pages
 
 1. **Home** (`/`) - Hero section, featured work, contact
 2. **About** (`/about`) - Personal story and inspirations
@@ -83,7 +83,7 @@ osiris-stephenson-portfolio/
    - VR Hand Gestures (`/case-study/vr-hand-gestures`)
    - Hyper-Localized Neighborhood (`/case-study/hyper-localized-neighborhood`)
 
-## 🎯 Key Components
+##  Key Components
 
 ### Header
 - Responsive navigation
@@ -105,7 +105,7 @@ osiris-stephenson-portfolio/
 - Research methodology explanations
 - Visual documentation and results
 
-## 🚀 Deployment
+##  Deployment
 
 ### Netlify (Recommended)
 1. Connect your GitHub repository
@@ -119,7 +119,7 @@ npm run build
 # Upload dist/ folder to your hosting provider
 ```
 
-## 🔧 Development
+##  Development
 
 ### Available Scripts
 - `npm run dev` - Start development server
@@ -133,13 +133,13 @@ npm run build
 3. Update featured work in `src/components/FeaturedWork.tsx`
 4. Add project images to `public/` folder
 
-## 📱 Responsive Breakpoints
+##  Responsive Breakpoints
 
 - Mobile: < 768px
 - Tablet: 768px - 1024px
 - Desktop: > 1024px
 
-## 🎨 Design System
+##  Design System
 
 ### Colors
 - Primary: Blue (#2563eb)
@@ -152,12 +152,12 @@ npm run build
 - Body: Regular weight, 1.5 line height
 - Code: Monospace font family
 
-## 📞 Contact
+##  Contact
 
 - Email: info.stephensonconsulting@gmail.com
 - LinkedIn: [linkedin.com/in/stephensoe](https://linkedin.com/in/stephensoe)
-- Location: Monterey, CA
+- Location: San Francisco, CA
 
-## 📄 License
+##  License
 
 This project is private and proprietary. All rights reserved.

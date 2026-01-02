@@ -1,8 +1,8 @@
 # Osiris Stephenson - Product Designer Portfolio
 
-A modern, responsive portfolio website showcasing UX research work and case studies.
+A modern, responsive portfolio website showcasing Product Design work!
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 - Node.js 18 or higher

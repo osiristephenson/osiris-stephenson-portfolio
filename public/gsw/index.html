@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSW+ — Case Study | Product Design Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --warriors-blue: #1D428A;
+      --warriors-gold: #FFC72C;
+      --warriors-gold-dark: #B8860B;
+      --bg-dark: #0a0a0f;
+      --bg-card: #111118;
+      --bg-card-hover: #1a1a24;
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --text-muted: rgba(255, 255, 255, 0.5);
+      --gradient-blue-gold: linear-gradient(135deg, #1D428A 0%, #2a5298 30%, #7a6f4c 70%, #FFC72C 100%);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .bg-pattern {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        radial-gradient(ellipse at 20% 20%, rgba(29, 66, 138, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(255, 199, 44, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 0;
+      z-index: 100;
+      background: linear-gradient(to bottom, rgba(10, 10, 15, 0.95), transparent);
+      backdrop-filter: blur(10px);
+    }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 2px; color: var(--warriors-gold); }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s ease; }
+    .nav-links a:hover { color: var(--warriors-gold); }
+
+    /* ============================================
+       iPHONE 17 PRO MAX MOCKUP
+       ============================================ */
+    .iphone-mockup {
+      --phone-width: 280px;
+      --phone-height: 605px;
+      --frame-radius: 55px;
+      --screen-radius: 47px;
+      --bezel: 10px;
+      position: relative;
+      width: var(--phone-width);
+      height: var(--phone-height);
+      flex-shrink: 0;
+    }
+    .iphone-mockup.large {
+      --phone-width: 320px;
+      --phone-height: 691px;
+      --frame-radius: 60px;
+      --screen-radius: 52px;
+      --bezel: 11px;
+    }
+    .iphone-mockup.small {
+      --phone-width: 240px;
+      --phone-height: 518px;
+      --frame-radius: 46px;
+      --screen-radius: 40px;
+      --bezel: 8px;
+    }
+
+    .iphone-frame {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, #E8B896 0%, #D49B72 12%, #C4875A 28%, #8B5A3C 55%, #C4875A 72%, #D49B72 88%, #E8B896 100%);
+      border-radius: var(--frame-radius);
+      box-shadow:
+        0 50px 100px -20px rgba(0, 0, 0, 0.5),
+        0 30px 60px -15px rgba(0, 0, 0, 0.4),
+        0 0 40px -5px rgba(196, 135, 90, 0.15),
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.25),
+        inset 0 -1px 1px 0 rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(0, 0, 0, 0.2);
+    }
+    .iphone-frame::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 20%;
+      right: 20%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 30%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0.5) 70%, transparent 100%);
+    }
+    .iphone-frame::after {
+      content: '';
+      position: absolute;
+      right: -3px;
+      top: 25%;
+      width: 4px;
+      height: 70px;
+      background: linear-gradient(90deg, #8B5A3C, #C4875A, #D49B72);
+      border-radius: 0 3px 3px 0;
+      box-shadow: 1px 0 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .iphone-screen-area {
+      position: absolute;
+      inset: var(--bezel);
+      background: #0a0a0a;
+      border-radius: var(--screen-radius);
+      overflow: hidden;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    .iphone-screen {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--screen-radius);
+      overflow: hidden;
+      background: #000;
+    }
+    .iphone-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    .dynamic-island {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 126px;
+      height: 37px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 10;
+      box-shadow: inset 0 0 0 1.5px rgba(30, 30, 35, 0.8), inset 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    .dynamic-island::before {
+      content: '';
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 12px;
+      background: radial-gradient(circle at 35% 35%, #3a3a4a, #1a1a24 40%, #0a0a0f 70%, #000);
+      border-radius: 50%;
+    }
+    .dynamic-island::after {
+      content: '';
+      position: absolute;
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 6px;
+      background: #1a1a24;
+      border-radius: 50%;
+    }
+
+    .screen-reflection {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 20%, transparent 40%);
+      pointer-events: none;
+      border-radius: var(--screen-radius);
+      z-index: 15;
+    }
+    .iphone-shadow {
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 85%;
+      height: 40px;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.35), rgba(0,0,0,0.15) 40%, transparent 70%);
+      filter: blur(15px);
+      z-index: -1;
+    }
+
+    /* ============================================
+       HERO
+       ============================================ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+    }
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .hero-text { animation: fadeInUp 1s ease-out; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .project-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(255, 199, 44, 0.1);
+      border: 1px solid rgba(255, 199, 44, 0.3);
+      border-radius: 100px;
+      font-size: 0.85rem;
+      color: var(--warriors-gold);
+      margin-bottom: 24px;
+    }
+    .project-label span {
+      width: 8px;
+      height: 8px;
+      background: var(--warriors-gold);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 10vw, 7rem);
+      line-height: 0.95;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+      background: var(--gradient-blue-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      max-width: 500px;
+      line-height: 1.7;
+    }
+    .hero-meta { display: flex; gap: 48px; }
+    .meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .meta-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); }
+    .meta-value { font-size: 1rem; font-weight: 600; }
+
+    .hero-mockups {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 20px;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+    .hero-mockups .iphone-mockup:nth-child(1) { transform: translateX(80px) rotate(-12deg) scale(0.9); z-index: 1; }
+    .hero-mockups .iphone-mockup:nth-child(2) { z-index: 3; }
+    .hero-mockups .iphone-mockup:nth-child(3) { transform: translateX(-80px) rotate(12deg) scale(0.9); z-index: 2; }
+
+    /* ============================================
+       SECTIONS
+       ============================================ */
+    section { padding: 120px 0; }
+    .section-header { text-align: center; margin-bottom: 80px; }
+    .section-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--warriors-gold); margin-bottom: 16px; }
+    h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 6vw, 4rem); letter-spacing: -1px; margin-bottom: 16px; }
+    .section-desc { font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+
+    /* Overview */
+    .overview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .overview-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+    .overview-card:hover { background: var(--bg-card-hover); transform: translateY(-4px); border-color: rgba(255, 199, 44, 0.2); }
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--warriors-gold) 0%, var(--warriors-gold-dark) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    .overview-card h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 12px; }
+    .overview-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+
+    /* Features */
+    .feature-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      padding: 100px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .feature-section:last-child { border-bottom: none; }
+    .feature-section.reverse { direction: rtl; }
+    .feature-section.reverse > * { direction: ltr; }
+
+    .feature-content h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; margin-bottom: 20px; }
+    .feature-content p { color: var(--text-secondary); margin-bottom: 32px; font-size: 1.1rem; line-height: 1.7; }
+    .feature-list { list-style: none; }
+    .feature-list li { display: flex; align-items: center; gap: 12px; padding: 12px 0; color: var(--text-secondary); }
+    .feature-list li::before {
+      content: '✓';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: rgba(255, 199, 44, 0.15);
+      color: var(--warriors-gold);
+      font-weight: bold;
+      font-size: 0.75rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .feature-mockups { display: flex; gap: 30px; justify-content: center; align-items: flex-start; }
+    .feature-mockups .iphone-mockup:nth-child(2) { transform: translateY(60px); }
+
+    /* Gallery */
+    .gallery-scroll {
+      display: flex;
+      gap: 40px;
+      padding: 40px 60px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .gallery-scroll::-webkit-scrollbar { display: none; }
+    .gallery-scroll .iphone-mockup { scroll-snap-align: center; flex-shrink: 0; }
+
+    /* Design System */
+    .design-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .design-block {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .design-block h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 20px; }
+    .color-swatches { display: flex; flex-direction: column; gap: 12px; }
+    .color-swatch { display: flex; align-items: center; gap: 12px; }
+    .swatch { width: 40px; height: 40px; border-radius: 10px; }
+    .swatch.blue { background: var(--warriors-blue); }
+    .swatch.gold { background: var(--warriors-gold); }
+    .swatch.dark { background: var(--bg-dark); border: 1px solid rgba(255,255,255,0.1); }
+    .swatch.card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.1); }
+    .color-name { font-size: 0.9rem; color: var(--text-secondary); }
+    .typography-sample { display: flex; flex-direction: column; gap: 16px; }
+    .type-bebas { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 1px; }
+    .type-dm { font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--text-secondary); }
+    .icon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .icon-item { width: 44px; height: 44px; background: rgba(255, 255, 255, 0.05); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tech-tag { padding: 8px 14px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; font-size: 0.85rem; color: var(--text-secondary); }
+
+    /* Results */
+    .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .result-card {
+      background: linear-gradient(135deg, rgba(29, 66, 138, 0.15) 0%, rgba(29, 66, 138, 0.05) 100%);
+      border: 1px solid rgba(29, 66, 138, 0.2);
+      border-radius: 20px;
+      padding: 48px 24px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .result-card:hover { transform: translateY(-4px); border-color: rgba(255, 199, 44, 0.3); }
+    .result-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      background: var(--gradient-blue-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    .result-label { color: var(--text-secondary); font-size: 0.95rem; }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(135deg, rgba(255, 199, 44, 0.08) 0%, rgba(29, 66, 138, 0.08) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 32px;
+      margin: 0 24px;
+      padding: 80px;
+      text-align: center;
+    }
+    .cta-section h2 { margin-bottom: 16px; }
+    .cta-section p { color: var(--text-secondary); max-width: 500px; margin: 0 auto 40px; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 16px 32px; border-radius: 100px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; }
+    .btn-primary { background: var(--warriors-gold); color: #000; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255, 199, 44, 0.3); }
+    .btn-secondary { background: rgba(255, 255, 255, 0.1); color: var(--text-primary); border: 1px solid rgba(255, 255, 255, 0.2); }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.15); }
+
+    /* Footer */
+    footer { padding: 40px 0; border-top: 1px solid rgba(255, 255, 255, 0.05); margin-top: 80px; }
+    .footer-content { display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 1px; color: var(--text-muted); }
+    .footer-text { color: var(--text-muted); font-size: 0.9rem; }
+
+    /* ============================================
+       RESPONSIVE - TABLET (1200px)
+       ============================================ */
+    @media (max-width: 1200px) {
+      .hero-content { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+      .hero-subtitle { margin-left: auto; margin-right: auto; }
+      .hero-meta { justify-content: center; }
+      .design-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ============================================
+       RESPONSIVE - SMALL TABLET (1024px)
+       ============================================ */
+    @media (max-width: 1024px) {
+      section { padding: 80px 0; }
+      .section-header { margin-bottom: 60px; }
+      
+      .feature-section { grid-template-columns: 1fr; gap: 60px; text-align: center; }
+      .feature-section.reverse { direction: ltr; }
+      .feature-list { display: inline-block; text-align: left; }
+      .feature-content h3 { font-size: 2rem; }
+      .feature-content p { font-size: 1rem; }
+      
+      .overview-grid, .results-grid { grid-template-columns: repeat(2, 1fr); }
+      
+      .feature-mockups { flex-wrap: wrap; gap: 20px; }
+      .feature-mockups .iphone-mockup:nth-child(2) { transform: translateY(0); }
+    }
+
+    /* ============================================
+       RESPONSIVE - MOBILE LANDSCAPE (768px)
+       ============================================ */
+    @media (max-width: 768px) {
+      .container { padding: 0 16px; }
+      
+      /* Navigation */
+      nav { padding: 16px 0; }
+      .nav-links { display: none; }
+      .nav-logo { font-size: 1.25rem; }
+      
+      /* Hero */
+      .hero { min-height: auto; padding: 100px 0 60px; }
+      .hero-content { gap: 32px; }
+      .hero-subtitle { font-size: 1rem; margin-bottom: 32px; }
+      .hero-meta { flex-wrap: wrap; gap: 24px; }
+      .meta-item { min-width: 80px; }
+      
+      /* Hero Mockups - Show only center phone on mobile */
+      .hero-mockups { padding: 40px 10px; }
+      .hero-mockups .iphone-mockup:nth-child(1),
+      .hero-mockups .iphone-mockup:nth-child(3) { display: none; }
+      .hero-mockups .iphone-mockup.large {
+        --phone-width: 260px;
+        --phone-height: 562px;
+        --frame-radius: 50px;
+        --screen-radius: 42px;
+        --bezel: 9px;
+      }
+      
+      /* Phone Mockups General */
+      .iphone-mockup { 
+        --phone-width: 200px; 
+        --phone-height: 432px; 
+        --frame-radius: 40px; 
+        --screen-radius: 34px; 
+        --bezel: 8px; 
+      }
+      .dynamic-island { width: 90px; height: 28px; top: 10px; border-radius: 16px; }
+      .dynamic-island::before { width: 10px; height: 10px; right: 16px; }
+      .dynamic-island::after { width: 5px; height: 5px; left: 24px; }
+      
+      /* Sections */
+      section { padding: 60px 0; }
+      .section-header { margin-bottom: 40px; }
+      .section-label { font-size: 0.75rem; letter-spacing: 1.5px; }
+      .section-desc { font-size: 1rem; padding: 0 16px; }
+      
+      /* Overview */
+      .overview-grid { grid-template-columns: 1fr; gap: 16px; }
+      .overview-card { padding: 24px; border-radius: 16px; }
+      .card-icon { width: 40px; height: 40px; font-size: 1.25rem; border-radius: 10px; }
+      .overview-card h3 { font-size: 1.1rem; }
+      .overview-card p { font-size: 0.9rem; }
+      
+      /* Features */
+      .feature-section { padding: 60px 0; gap: 40px; }
+      .feature-content h3 { font-size: 1.75rem; }
+      .feature-content p { font-size: 0.95rem; margin-bottom: 24px; }
+      .feature-list li { padding: 10px 0; font-size: 0.9rem; }
+      .feature-list li::before { width: 20px; height: 20px; font-size: 0.65rem; }
+      
+      .feature-mockups { gap: 16px; }
+      .feature-mockups .iphone-mockup { 
+        --phone-width: 180px; 
+        --phone-height: 389px; 
+      }
+      
+      /* Gallery */
+      .gallery-scroll { gap: 20px; padding: 20px 24px; }
+      .gallery-scroll .iphone-mockup { 
+        --phone-width: 200px; 
+        --phone-height: 432px; 
+      }
+      
+      /* Design System */
+      .design-grid { grid-template-columns: 1fr; gap: 16px; }
+      .design-block { padding: 20px; }
+      .design-block h4 { font-size: 0.7rem; margin-bottom: 16px; }
+      .swatch { width: 32px; height: 32px; }
+      .color-name { font-size: 0.85rem; }
+      .type-bebas { font-size: 1.5rem; }
+      .tech-tag { padding: 6px 12px; font-size: 0.8rem; }
+      
+      /* Results */
+      .results-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .result-card { padding: 32px 16px; border-radius: 16px; }
+      .result-number { font-size: 2.5rem; }
+      .result-label { font-size: 0.85rem; }
+      
+      /* CTA */
+      .cta-section { padding: 48px 24px; margin: 0 16px; border-radius: 24px; }
+      .cta-section p { font-size: 0.95rem; }
+      .cta-buttons { flex-direction: column; gap: 12px; }
+      .btn { padding: 14px 28px; font-size: 0.95rem; justify-content: center; }
+      
+      /* Footer */
+      footer { padding: 32px 0; margin-top: 60px; }
+      .footer-content { flex-direction: column; gap: 12px; text-align: center; }
+      .footer-logo { font-size: 1rem; }
+      .footer-text { font-size: 0.8rem; }
+    }
+
+    /* ============================================
+       RESPONSIVE - MOBILE PORTRAIT (480px)
+       ============================================ */
+    @media (max-width: 480px) {
+      /* Hero */
+      .hero { padding: 90px 0 40px; }
+      h1 { font-size: 3.5rem; margin-bottom: 16px; }
+      .project-label { font-size: 0.75rem; padding: 6px 12px; margin-bottom: 16px; }
+      .hero-subtitle { font-size: 0.95rem; line-height: 1.6; }
+      .hero-meta { gap: 20px; }
+      .meta-label { font-size: 0.65rem; }
+      .meta-value { font-size: 0.9rem; }
+      
+      /* Hero Mockup */
+      .hero-mockups { padding: 30px 0; }
+      .hero-mockups .iphone-mockup.large {
+        --phone-width: 220px;
+        --phone-height: 475px;
+        --frame-radius: 44px;
+        --screen-radius: 38px;
+        --bezel: 8px;
+      }
+      
+      /* Phone Mockups */
+      .iphone-mockup { 
+        --phone-width: 160px; 
+        --phone-height: 346px; 
+        --frame-radius: 32px; 
+        --screen-radius: 26px; 
+        --bezel: 6px; 
+      }
+      .dynamic-island { width: 70px; height: 22px; top: 8px; border-radius: 12px; }
+      .dynamic-island::before { width: 8px; height: 8px; right: 12px; }
+      .dynamic-island::after { width: 4px; height: 4px; left: 18px; }
+      .iphone-shadow { bottom: -25px; height: 25px; }
+      
+      /* Sections */
+      section { padding: 48px 0; }
+      h2 { font-size: 2rem; }
+      .section-desc { font-size: 0.9rem; }
+      
+      /* Features - Single phone on very small screens */
+      .feature-mockups .iphone-mockup:nth-child(2) { display: none; }
+      .feature-mockups .iphone-mockup { 
+        --phone-width: 200px; 
+        --phone-height: 432px;
+        --frame-radius: 40px;
+        --screen-radius: 34px;
+        --bezel: 8px;
+      }
+      .feature-section { padding: 40px 0; }
+      .feature-content h3 { font-size: 1.5rem; }
+      
+      /* Gallery */
+      .gallery-scroll { padding: 16px; gap: 16px; }
+      .gallery-scroll .iphone-mockup { 
+        --phone-width: 180px; 
+        --phone-height: 389px;
+        --frame-radius: 36px;
+        --screen-radius: 30px;
+        --bezel: 7px;
+      }
+      
+      /* Results */
+      .results-grid { grid-template-columns: 1fr; }
+      .result-card { padding: 28px 16px; }
+      .result-number { font-size: 2.25rem; }
+      
+      /* CTA */
+      .cta-section { margin: 0 12px; padding: 36px 20px; }
+      .cta-section h2 { font-size: 1.75rem; }
+    }
+
+    /* ============================================
+       RESPONSIVE - VERY SMALL SCREENS (360px)
+       ============================================ */
+    @media (max-width: 360px) {
+      .container { padding: 0 12px; }
+      h1 { font-size: 3rem; }
+      .hero-subtitle { font-size: 0.9rem; }
+      .hero-meta { flex-direction: column; gap: 16px; align-items: center; }
+      
+      .hero-mockups .iphone-mockup.large {
+        --phone-width: 200px;
+        --phone-height: 432px;
+        --frame-radius: 40px;
+        --screen-radius: 34px;
+        --bezel: 8px;
+      }
+      
+      .overview-card { padding: 20px; }
+      .feature-mockups .iphone-mockup,
+      .gallery-scroll .iphone-mockup { 
+        --phone-width: 160px; 
+        --phone-height: 346px;
+        --frame-radius: 32px;
+        --screen-radius: 26px;
+        --bezel: 6px;
+      }
+    }
+
+    /* ============================================
+       TOUCH DEVICE OPTIMIZATIONS
+       ============================================ */
+    @media (hover: none) and (pointer: coarse) {
+      .overview-card:hover,
+      .result-card:hover { transform: none; }
+      .btn:hover { transform: none; box-shadow: none; }
+      .btn:active { transform: scale(0.98); }
+      .nav-links a:hover { color: var(--text-secondary); }
+      
+      /* Ensure touch targets are at least 44px */
+      .btn { min-height: 48px; }
+      .nav-links a { padding: 8px 0; }
+    }
+
+    /* ============================================
+       LANDSCAPE ORIENTATION
+       ============================================ */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .hero { min-height: auto; padding: 80px 0 40px; }
+      .hero-mockups .iphone-mockup.large {
+        --phone-width: 160px;
+        --phone-height: 346px;
+      }
+      section { padding: 40px 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-pattern"></div>
+
+  <nav>
+    <div class="container">
+      <div class="nav-logo">GSW+</div>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#features">Features</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#results">Results</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="project-label"><span></span>iOS App Design & Development</div>
+          <h1>GSW+</h1>
+          <p class="hero-subtitle">The ultimate Golden State Warriors fan companion — featuring AI-powered insights, real-time stats, video highlights, full season schedules, and live injury reports.</p>
+          <div class="hero-meta">
+            <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Product Designer</span></div>
+            <div class="meta-item"><span class="meta-label">Platform</span><span class="meta-value">iOS (Swift/Xcode)</span></div>
+            <div class="meta-item"><span class="meta-label">Timeline</span><span class="meta-value">2025</span></div>
+          </div>
+        </div>
+        <div class="hero-mockups">
+          <div class="iphone-mockup">
+            <div class="iphone-frame"></div>
+            <div class="iphone-screen-area">
+              <div class="iphone-screen"><img src="IMG_1796.PNG" alt="Highlights"></div>
+              <div class="dynamic-island"></div>
+              <div class="screen-reflection"></div>
+            </div>
+            <div class="iphone-shadow"></div>
+          </div>
+          <div class="iphone-mockup large">
+            <div class="iphone-frame"></div>
+            <div class="iphone-screen-area">
+              <div class="iphone-screen"><img src="IMG_1801.PNG" alt="Dub AI Assistant"></div>
+              <div class="dynamic-island"></div>
+              <div class="screen-reflection"></div>
+            </div>
+            <div class="iphone-shadow"></div>
+          </div>
+          <div class="iphone-mockup">
+            <div class="iphone-frame"></div>
+            <div class="iphone-screen-area">
+              <div class="iphone-screen"><img src="IMG_1802.PNG" alt="Schedule"></div>
+              <div class="dynamic-island"></div>
+              <div class="screen-reflection"></div>
+            </div>
+            <div class="iphone-shadow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section id="overview">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Project Overview</p>
+        <h2>Elevating the Fan Experience</h2>
+        <p class="section-desc">GSW+ bridges the gap between casual viewers and die-hard fans by providing a centralized hub for everything Golden State Warriors.</p>
+      </div>
+      <div class="overview-grid">
+        <div class="overview-card">
+          <div class="card-icon">🎯</div>
+          <h3>The Challenge</h3>
+          <p>Warriors fans were scattered across multiple platforms to get game updates, watch highlights, and track player news. There was no unified experience tailored specifically to the Dub Nation community.</p>
+        </div>
+        <div class="overview-card">
+          <div class="card-icon">💡</div>
+          <h3>The Solution</h3>
+          <p>A native iOS app with an AI-powered assistant (Dub), real-time stats, curated video highlights, full season schedules, and live injury reports — all in one beautifully designed interface.</p>
+        </div>
+        <div class="overview-card">
+          <div class="card-icon">✨</div>
+          <h3>The Impact</h3>
+          <p>Created a comprehensive fan companion with a premium tier featuring unlimited AI access, extended briefings, game predictions, and ad-free experience for power users.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Key Features</p>
+        <h2>Built for Dub Nation</h2>
+        <p class="section-desc">Every feature was designed with the Warriors fan in mind — from the signature blue-to-gold gradient to real-time game integration.</p>
+      </div>
+
+      <!-- Feature 1: Highlights -->
+      <div class="feature-section">
+        <div class="feature-content">
+          <h3>Video Highlights Hub</h3>
+          <p>Catch every Warriors moment with smart content categories — from full game highlights to Dub Nation content and Steve Kerr's postgame press conferences.</p>
+          <ul class="feature-list">
+            <li>Highlights — Full game recaps & plays of the week</li>
+            <li>Dub Nation — Player profiles & team content</li>
+            <li>Press Room — Postgame interviews & press conferences</li>
+            <li>YouTube integration with thumbnail previews</li>
+            <li>2025-26 NBA Season content</li>
+          </ul>
+        </div>
+        <div class="feature-mockups">
+          <div class="iphone-mockup">
+            <div class="iphone-frame"></div>
+            <div class="iphone-screen-area">
+              <div class="iphone-screen"><img src="IMG_1796.PNG" alt="Highlights - Game Highlights"></div>
+              <div class="dynamic-island"></div>
+              <div class="screen-reflection"></div>
+            </div>
+            <div class="iphone-shadow"></div>
+          </div>
+          <div class="iphone-mockup">
+            <div class="iphone-frame"></div>
+            <div class="iphone-screen-area">
+              <div class="iphone-screen"><img src="IMG_1798.PNG" alt="Highlights - Dub Nation"></div>
+              <div class="dynamic-island"></div>
+              <div class="screen-reflection"></div>
+            </div>
+            <div class="iphone-shadow"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 2: Press Room -->
+      <div class="feature-section reverse">
+        <div class="feature-content">
+          <h3>Press Room Coverage</h3>
+          <p>Stay connected with the team through comprehensive press conference coverage featuring coaches, players, and post-game analysis from the Warriors media team.</p>
+          <ul class="feature-list">
+            <li>Steph Curry injury status updates</li>
+            <li>Steve Kerr postgame breakdowns</li>
+            <li>Player interview highlights</li>
+            <li>Rookie press conferences</li>
+            <li>Real-time video updates</li>
+          </ul>
+        </div>
+        <div class="feature-mockups">
+          <div class="iphone-mockup">
+            <div class="iphone-frame"></div>
+            <div class="iphone-screen-area">
+              <div class="iphone-screen"><img src="IMG_1800.PNG" alt="Press Room"></div>
+              <div class="dynamic-island"></div>
+              <div class="screen-reflection"></div>
+            </div>
+            <div class="iphone-shadow"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 3: Dub AI Assistant -->
+      <div class="feature-section">
+        <div class="feature-content">
+          <h3>Dub — AI Assistant</h3>
+          <p>Meet Dub, your personal Warriors AI assistant. Ask anything about the team — from current stats to dynasty history — and get instant, intelligent answers.</p>
+          <ul class="feature-list">
+            <li>Natural language queries about the Warriors</li>
+            <li>Quick action buttons: Stats, Schedule, Analysis, History</li>
+            <li>"How are the Warriors doing this season?"</li>
+            <li>"Predict our next game" with AI analysis</li>
+            <li>"How is Steph Curry playing lately?"</li>
+          </ul>
+        </div>
+        <div class="feature-mockups">
+          <div class="iphone-mockup">
+            <div class="iphone-frame"></div>
+            <div class="iphone-screen-area">
+              <div class="iphone-screen"><img src="IMG_1801.PNG" alt="Dub AI Assistant"></div>
+              <div class="dynamic-island"></div>
+              <div class="screen-reflection"></div>
+            </div>
+            <div class="iphone-shadow"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 4: Schedule -->
+      <div class="feature-section reverse">
+        <div class="feature-content">
+          <h3>Full Season Schedule</h3>
+          <p>Track all 82 games of the 2025-26 season with smart filters for All Games, Upcoming, and Past — complete with final scores, opponent details, and game times.</p>
+          <ul class="feature-list">
+            <li>Complete 82-game schedule</li>
+            <li>Filter by All/Upcoming/Past games</li>
+            <li>Live score updates with win/loss indicators</li>
+            <li>Game time and date information</li>
+            <li>Month-by-month organization</li>
+          </ul>
+        </div>
+        <div class="feature-mockups">
+          <div class="iphone-mockup">
+            <div class="iphone-frame"></div>
+            <div class="iphone-screen-area">
+              <div class="iphone-screen"><img src="IMG_1802.PNG" alt="Schedule - All Games"></div>
+              <div class="dynamic-island"></div>
+              <div class="screen-reflection"></div>
+            </div>
+            <div class="iphone-shadow"></div>
+          </div>
+          <div class="iphone-mockup">
+            <div class="iphone-frame"></div>
+            <div class="iphone-screen-area">
+              <div class="iphone-screen"><img src="IMG_1804.PNG" alt="Schedule - Past Games"></div>
+              <div class="dynamic-island"></div>
+              <div class="screen-reflection"></div>
+            </div>
+            <div class="iphone-shadow"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 5: More & Injuries -->
+      <div class="feature-section">
+        <div class="feature-content">
+          <h3>Player Updates & More</h3>
+          <p>Real-time injury reports with status indicators, news updates, and app settings — so you always know who's suiting up and what's happening with the team.</p>
+          <ul class="feature-list">
+            <li>Live injury status: Out, Day-To-Day, Probable</li>
+            <li>Detailed injury descriptions & updates</li>
+            <li>News & Updates quick access</li>
+            <li>Premium upgrade options</li>
+            <li>Official Warriors website links</li>
+          </ul>
+        </div>
+        <div class="feature-mockups">
+          <div class="iphone-mockup">
+            <div class="iphone-frame"></div>
+            <div class="iphone-screen-area">
+              <div class="iphone-screen"><img src="IMG_1805.PNG" alt="More - Settings & Injuries"></div>
+              <div class="dynamic-island"></div>
+              <div class="screen-reflection"></div>
+            </div>
+            <div class="iphone-shadow"></div>
+          </div>
+          <div class="iphone-mockup">
+            <div class="iphone-frame"></div>
+            <div class="iphone-screen-area">
+              <div class="iphone-screen"><img src="IMG_1806.PNG" alt="Premium"></div>
+              <div class="dynamic-island"></div>
+              <div class="screen-reflection"></div>
+            </div>
+            <div class="iphone-shadow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">App Gallery</p>
+        <h2>Complete App Walkthrough</h2>
+        <p class="section-desc">Explore every screen of the GSW+ experience — from highlights to the premium subscription flow.</p>
+      </div>
+    </div>
+    <div class="gallery-scroll">
+      <div class="iphone-mockup"><div class="iphone-frame"></div><div class="iphone-screen-area"><div class="iphone-screen"><img src="IMG_1796.PNG" alt="Highlights"></div><div class="dynamic-island"></div><div class="screen-reflection"></div></div><div class="iphone-shadow"></div></div>
+      <div class="iphone-mockup"><div class="iphone-frame"></div><div class="iphone-screen-area"><div class="iphone-screen"><img src="IMG_1798.PNG" alt="Dub Nation"></div><div class="dynamic-island"></div><div class="screen-reflection"></div></div><div class="iphone-shadow"></div></div>
+      <div class="iphone-mockup"><div class="iphone-frame"></div><div class="iphone-screen-area"><div class="iphone-screen"><img src="IMG_1800.PNG" alt="Press Room"></div><div class="dynamic-island"></div><div class="screen-reflection"></div></div><div class="iphone-shadow"></div></div>
+      <div class="iphone-mockup"><div class="iphone-frame"></div><div class="iphone-screen-area"><div class="iphone-screen"><img src="IMG_1801.PNG" alt="Dub AI"></div><div class="dynamic-island"></div><div class="screen-reflection"></div></div><div class="iphone-shadow"></div></div>
+      <div class="iphone-mockup"><div class="iphone-frame"></div><div class="iphone-screen-area"><div class="iphone-screen"><img src="IMG_1802.PNG" alt="Schedule All"></div><div class="dynamic-island"></div><div class="screen-reflection"></div></div><div class="iphone-shadow"></div></div>
+      <div class="iphone-mockup"><div class="iphone-frame"></div><div class="iphone-screen-area"><div class="iphone-screen"><img src="IMG_1803.PNG" alt="Schedule Upcoming"></div><div class="dynamic-island"></div><div class="screen-reflection"></div></div><div class="iphone-shadow"></div></div>
+      <div class="iphone-mockup"><div class="iphone-frame"></div><div class="iphone-screen-area"><div class="iphone-screen"><img src="IMG_1804.PNG" alt="Schedule Past"></div><div class="dynamic-island"></div><div class="screen-reflection"></div></div><div class="iphone-shadow"></div></div>
+      <div class="iphone-mockup"><div class="iphone-frame"></div><div class="iphone-screen-area"><div class="iphone-screen"><img src="IMG_1805.PNG" alt="More"></div><div class="dynamic-island"></div><div class="screen-reflection"></div></div><div class="iphone-shadow"></div></div>
+      <div class="iphone-mockup"><div class="iphone-frame"></div><div class="iphone-screen-area"><div class="iphone-screen"><img src="IMG_1806.PNG" alt="Premium"></div><div class="dynamic-island"></div><div class="screen-reflection"></div></div><div class="iphone-shadow"></div></div>
+    </div>
+  </section>
+
+  <!-- Design System -->
+  <section id="design">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Design System</p>
+        <h2>Visual Language</h2>
+        <p class="section-desc">A cohesive design system rooted in the Warriors' brand identity, balancing team colors with a premium dark-mode aesthetic.</p>
+      </div>
+      <div class="design-grid">
+        <div class="design-block">
+          <h4>Color Palette</h4>
+          <div class="color-swatches">
+            <div class="color-swatch"><div class="swatch blue"></div><span class="color-name">Warriors Blue</span></div>
+            <div class="color-swatch"><div class="swatch gold"></div><span class="color-name">Warriors Gold</span></div>
+            <div class="color-swatch"><div class="swatch dark"></div><span class="color-name">Background Dark</span></div>
+            <div class="color-swatch"><div class="swatch card"></div><span class="color-name">Card Surface</span></div>
+          </div>
+        </div>
+        <div class="design-block">
+          <h4>Typography</h4>
+          <div class="typography-sample">
+            <span class="type-bebas">Bebas Neue</span>
+            <span class="type-dm">DM Sans — Body Text</span>
+            <span class="type-dm" style="font-weight: 600;">DM Sans — Semibold</span>
+          </div>
+        </div>
+        <div class="design-block">
+          <h4>Iconography</h4>
+          <div class="icon-grid">
+            <div class="icon-item">🏠</div>
+            <div class="icon-item">▶️</div>
+            <div class="icon-item">🏀</div>
+            <div class="icon-item">📅</div>
+            <div class="icon-item">⚙️</div>
+            <div class="icon-item">⭐</div>
+          </div>
+        </div>
+        <div class="design-block">
+          <h4>Tech Stack</h4>
+          <div class="tech-stack">
+            <span class="tech-tag">Swift</span>
+            <span class="tech-tag">SwiftUI</span>
+            <span class="tech-tag">Xcode</span>
+            <span class="tech-tag">Claude AI</span>
+            <span class="tech-tag">YouTube API</span>
+            <span class="tech-tag">NBA API</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section id="results">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Project Outcomes</p>
+        <h2>By the Numbers</h2>
+        <p class="section-desc">Key metrics and achievements from the GSW+ app development.</p>
+      </div>
+      <div class="results-grid">
+        <div class="result-card"><div class="result-number">9+</div><div class="result-label">Unique Screens</div></div>
+        <div class="result-card"><div class="result-number">AI</div><div class="result-label">Powered Assistant</div></div>
+        <div class="result-card"><div class="result-number">Live</div><div class="result-label">Real-time Data</div></div>
+        <div class="result-card"><div class="result-number">100%</div><div class="result-label">Native SwiftUI</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Let's Build Something Great</h2>
+      <p>Interested in collaborating on your next mobile app project? Let's connect and create exceptional user experiences together.</p>
+      <div class="cta-buttons">
+        <a href="mailto:hello@example.com" class="btn btn-primary">Get in Touch →</a>
+        <a href="#" class="btn btn-secondary">View More Work</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">GSW+ Case Study</div>
+        <div class="footer-text">Designed & Developed for Dub Nation</div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

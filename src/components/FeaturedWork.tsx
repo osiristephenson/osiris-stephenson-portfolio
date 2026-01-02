@@ -11,18 +11,42 @@ interface ProjectProps {
   impact: string;
   impactColor: string;
   slug?: string;
+  isPhoneMockup?: boolean;
 }
 
-function ProjectCard({ title, description, image, tags, duration, impact, impactColor, slug }: ProjectProps) {
+function ProjectCard({ title, description, image, tags, duration, impact, impactColor, slug, isPhoneMockup }: ProjectProps) {
   const CardContent = (
     <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg dark:hover:shadow-2xl transition-shadow h-full flex flex-col">
       {/* Project Image */}
-      <div className="aspect-[4/3] bg-gray-100 dark:bg-gray-700 overflow-hidden flex-shrink-0">
-        <img 
-          src={image} 
-          alt={title}
-          className="w-full h-full object-cover"
-        />
+      <div className={`aspect-[4/3] overflow-hidden flex-shrink-0 ${isPhoneMockup ? 'bg-gradient-to-b from-[#1D428A] to-[#FFC72C]/80 flex items-center justify-center' : 'bg-gray-100 dark:bg-gray-700'}`}>
+        {isPhoneMockup ? (
+          <div className="relative w-[140px] h-[280px] flex-shrink-0 transform scale-90">
+            {/* Phone Frame */}
+            <div 
+              className="absolute inset-0 rounded-[28px]"
+              style={{
+                background: 'linear-gradient(145deg, #E8B896 0%, #D49B72 12%, #C4875A 28%, #8B5A3C 55%, #C4875A 72%, #D49B72 88%, #E8B896 100%)',
+                boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.4), inset 0 1px 1px 0 rgba(255, 255, 255, 0.25)'
+              }}
+            />
+            {/* Screen */}
+            <div className="absolute inset-[5px] bg-black rounded-[24px] overflow-hidden">
+              <img 
+                src={image} 
+                alt={title}
+                className="w-full h-full object-cover"
+              />
+              {/* Dynamic Island */}
+              <div className="absolute top-2 left-1/2 -translate-x-1/2 w-[50px] h-[16px] bg-black rounded-[8px]" />
+            </div>
+          </div>
+        ) : (
+          <img 
+            src={image} 
+            alt={title}
+            className="w-full h-full object-cover"
+          />
+        )}
       </div>
       
       {/* Project Content */}
@@ -97,6 +121,57 @@ function ScrollToTop() {
 
 export default function FeaturedWork() {
   const projects = [
+    {
+      title: "GSW+",
+      description: "The ultimate Golden State Warriors fan companion app — featuring AI-powered insights, real-time stats, video highlights, and full season schedules.",
+      image: "/gsw/emblem.png",
+      tags: ["iOS App", "Swift/SwiftUI", "AI Assistant", "Product Design"],
+      duration: "2025",
+      impact: "9+ screens, AI-powered assistant, 100% native SwiftUI",
+      impactColor: "text-yellow-500",
+      slug: "gsw-plus",
+      isPhoneMockup: true
+    },
+    {
+      title: "Helvetici",
+      description: "Visual AI IDE for generating production-ready UI components from natural language descriptions.",
+      image: "/helvetici/hero.png",
+      tags: ["Desktop/iPad", "AI IDE", "Next.js", "Claude API"],
+      duration: "2025",
+      impact: "Transform words into beautiful, functional interfaces",
+      impactColor: "text-purple-500",
+      slug: "helvetici"
+    },
+    {
+      title: "SensoryFlow",
+      description: "Multi-sensory therapy tool combining visual stimulation with synchronized haptic feedback for anxiety relief and focus.",
+      image: "/sensoryflow/hero.png",
+      tags: ["iOS App", "Swift/SwiftUI", "Core Haptics", "Accessibility"],
+      duration: "2025",
+      impact: "12 visual activities with synchronized haptic patterns",
+      impactColor: "text-teal-500",
+      slug: "sensoryflow"
+    },
+    {
+      title: "nuvflo.io",
+      description: "AI-powered refund email generator that helps users recover money from subscription services.",
+      image: "/nuvflo/hero.png",
+      tags: ["SaaS", "Web App", "AI", "Stripe"],
+      duration: "2025",
+      impact: "Professional refund requests in seconds",
+      impactColor: "text-orange-500",
+      slug: "nuvflo"
+    },
+    {
+      title: "SearchForOthers",
+      description: "Semantic people search engine that understands natural language queries to find professionals.",
+      image: "/searchforothers/hero.png",
+      tags: ["SaaS", "Semantic Search", "Next.js", "Exa AI"],
+      duration: "2025",
+      impact: "Search by meaning, not keywords",
+      impactColor: "text-blue-500",
+      slug: "searchforothers"
+    },
     {
       title: "Intervention Management Research",
       description: "Researched and designed intervention tools to improve learning analytics, UX clarity, and educational outcomes.",

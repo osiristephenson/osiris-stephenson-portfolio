@@ -8,6 +8,7 @@ import BlueBotleCaseStudyPage from './pages/BlueBotleCaseStudyPage';
 import VRCaseStudyPage from './pages/VRCaseStudyPage';
 import ChirpCaseStudyPage from './pages/ChirpCaseStudyPage';
 import HabitCaseStudyPage from './pages/HabitCaseStudyPage';
+import GSWCaseStudyPage from './pages/GSWCaseStudyPage';
 import AboutPage from './pages/AboutPage';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="/case-study/blue-bottle-coffee" element={<BlueBotleCaseStudyPage />} />
             <Route path="/case-study/vr-hand-gestures" element={<VRCaseStudyPage />} />
             <Route path="/case-study/hyper-localized-neighborhood" element={<ChirpCaseStudyPage />} />
+            <Route path="/case-study/gsw-plus" element={<GSWCaseStudyPage />} />
             <Route path="/about" element={<AboutPage />} />
           </Routes>
         </div>
